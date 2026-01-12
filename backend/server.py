@@ -411,6 +411,183 @@ async def get_weak_areas(current_user: dict = Depends(get_current_user)):
     weak_areas.sort(key=lambda x: x["accuracy"])
     return weak_areas
 
+# ============ SPACED REPETITION ROUTES ============
+
+def calculate_sm2(quality: int, repetitions: int, ease_factor: float, interval: int):
+    """
+    SM-2 Algorithm for spaced repetition
+    quality: 0-5 (0-2 = fail, 3-5 = pass)
+    Returns: (new_repetitions, new_ease_factor, new_interval)
+    """
+    if quality < 3:
+        # Failed - reset
+        return 0, max(1.3, ease_factor - 0.2), 1
+    
+    # Passed
+    if repetitions == 0:
+        new_interval = 1
+    elif repetitions == 1:
+        new_interval = 3
+    else:
+        new_interval = round(interval * ease_factor)
+    
+    new_ease_factor = ease_factor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02))
+    new_ease_factor = max(1.3, new_ease_factor)
+    
+    return repetitions + 1, new_ease_factor, new_interval
+
+@api_router.get("/spaced-repetition/stats", response_model=SpacedRepetitionStats)
+async def get_sr_stats(current_user: dict = Depends(get_current_user)):
+    user_id = current_user["id"]
+    today = datetime.now(timezone.utc).date().isoformat()
+    
+    # Get all questions count
+    total_questions = await db.questions.count_documents({})
+    
+    # Get user's SR cards
+    cards = await db.spaced_repetition.find({"user_id": user_id}, {"_id": 0}).to_list(1000)
+    
+    reviewed_ids = {c["question_id"] for c in cards}
+    new_cards = total_questions - len(reviewed_ids)
+    
+    due_today = 0
+    mastered = 0
+    learning = 0
+    
+    for card in cards:
+        if card["next_review"] <= today:
+            due_today += 1
+        if card["interval"] > 21:
+            mastered += 1
+        else:
+            learning += 1
+    
+    # Include new cards in due count (limit to 10 new per day)
+    due_today += min(10, new_cards)
+    
+    return SpacedRepetitionStats(
+        total_cards=total_questions,
+        due_today=due_today,
+        mastered=mastered,
+        learning=learning,
+        new_cards=new_cards
+    )
+
+@api_router.get("/spaced-repetition/due")
+async def get_due_cards(limit: int = 20, current_user: dict = Depends(get_current_user)):
+    user_id = current_user["id"]
+    today = datetime.now(timezone.utc).date().isoformat()
+    
+    # Get cards due for review
+    due_cards = await db.spaced_repetition.find(
+        {"user_id": user_id, "next_review": {"$lte": today}},
+        {"_id": 0}
+    ).sort("next_review", 1).limit(limit).to_list(limit)
+    
+    due_question_ids = [c["question_id"] for c in due_cards]
+    
+    # Get new questions (never reviewed)
+    reviewed_ids = [c["question_id"] async for c in db.spaced_repetition.find({"user_id": user_id}, {"question_id": 1})]
+    
+    new_needed = max(0, limit - len(due_cards))
+    if new_needed > 0:
+        new_questions = await db.questions.find(
+            {"id": {"$nin": reviewed_ids}},
+            {"_id": 0}
+        ).limit(min(10, new_needed)).to_list(min(10, new_needed))
+    else:
+        new_questions = []
+    
+    # Get full question data for due cards
+    due_questions = []
+    if due_question_ids:
+        due_questions = await db.questions.find(
+            {"id": {"$in": due_question_ids}},
+            {"_id": 0}
+        ).to_list(len(due_question_ids))
+    
+    # Combine and add SR metadata
+    result = []
+    
+    for q in due_questions:
+        card = next((c for c in due_cards if c["question_id"] == q["id"]), None)
+        result.append({
+            **q,
+            "sr_data": {
+                "ease_factor": card["ease_factor"] if card else 2.5,
+                "interval": card["interval"] if card else 0,
+                "repetitions": card["repetitions"] if card else 0,
+                "is_new": False
+            }
+        })
+    
+    for q in new_questions:
+        result.append({
+            **q,
+            "sr_data": {
+                "ease_factor": 2.5,
+                "interval": 0,
+                "repetitions": 0,
+                "is_new": True
+            }
+        })
+    
+    return result
+
+@api_router.post("/spaced-repetition/review")
+async def submit_review(review: ReviewSubmit, current_user: dict = Depends(get_current_user)):
+    user_id = current_user["id"]
+    today = datetime.now(timezone.utc)
+    
+    # Validate quality rating
+    if review.quality < 0 or review.quality > 5:
+        raise HTTPException(status_code=400, detail="Quality must be between 0 and 5")
+    
+    # Get existing card or create new
+    existing = await db.spaced_repetition.find_one(
+        {"user_id": user_id, "question_id": review.question_id},
+        {"_id": 0}
+    )
+    
+    if existing:
+        repetitions = existing["repetitions"]
+        ease_factor = existing["ease_factor"]
+        interval = existing["interval"]
+    else:
+        repetitions = 0
+        ease_factor = 2.5
+        interval = 0
+    
+    # Calculate new values using SM-2
+    new_reps, new_ef, new_interval = calculate_sm2(review.quality, repetitions, ease_factor, interval)
+    
+    # Calculate next review date
+    next_review = (today + timedelta(days=new_interval)).date().isoformat()
+    
+    card_data = {
+        "user_id": user_id,
+        "question_id": review.question_id,
+        "ease_factor": new_ef,
+        "interval": new_interval,
+        "repetitions": new_reps,
+        "next_review": next_review,
+        "last_review": today.isoformat()
+    }
+    
+    await db.spaced_repetition.update_one(
+        {"user_id": user_id, "question_id": review.question_id},
+        {"$set": card_data},
+        upsert=True
+    )
+    
+    return {
+        "success": True,
+        "next_review": next_review,
+        "interval": new_interval,
+        "ease_factor": round(new_ef, 2),
+        "repetitions": new_reps
+    }
+
 # ============ SEED DATA ============
 
 @api_router.post("/seed-questions")
