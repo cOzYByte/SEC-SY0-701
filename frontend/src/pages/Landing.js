@@ -46,7 +46,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Shield weight="duotone" className="w-8 h-8 text-primary" />
-            <span className="font-mono font-bold text-xl tracking-tight">SECPLUS<span className="text-primary">PREP</span></span>
+            <span className="font-mono font-bold text-xl tracking-tight">SEC <span className="text-primary">SY0-701</span></span>
           </div>
           <div className="flex items-center gap-4">
             <Button
@@ -222,7 +222,7 @@ const Landing = () => {
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Shield weight="duotone" className="w-6 h-6 text-primary" />
-            <span className="font-mono font-bold">SECPLUSPREP</span>
+            <span className="font-mono font-bold">SEC SY0-701</span>
           </div>
           <p className="text-muted-foreground text-sm">
             CompTIA Security+ SY0-701 Study Platform
