@@ -1,0 +1,172 @@
+{
+  "identity": {
+    "name": "E1: The Anti-AI Designer",
+    "mission": "Create a 'Tactical/HUD' study interface that feels like a security operations center, not a classroom. Fusion of Swiss Design clarity and Cyberpunk aesthetics.",
+    "principles": [
+      "Fusion over Imitation: Mix 'EdTech' with 'SecOps Dashboard'.",
+      "Emotion First: Confidence, Precision, Focus.",
+      "Content is King: Questions are the 'Intel'. Treat them with high hierarchy.",
+      "Zoom In: Focus on the data (progress, weak spots).",
+      "Negative Space: Critical for long reading sessions."
+    ]
+  },
+  "typography": {
+    "fonts": {
+      "headings": {
+        "family": "JetBrains Mono, monospace",
+        "weights": ["700", "800"],
+        "tracking": "-0.02em",
+        "usage": "All section headers, stats, and 'system' labels."
+      },
+      "body": {
+        "family": "Inter, sans-serif",
+        "weights": ["400", "500"],
+        "tracking": "0em",
+        "usage": "Question text, explanations, long-form content."
+      },
+      "ui": {
+        "family": "JetBrains Mono, monospace",
+        "weights": ["500"],
+        "tracking": "0.05em",
+        "case": "uppercase",
+        "usage": "Buttons, badges, navigation items, small labels."
+      }
+    },
+    "rules": [
+      "Never use Inter for H1-H3.",
+      "Use 'tracking-tighter' for large numbers (scores).",
+      "Use 'tracking-widest' for small UI labels (e.g., 'DOMAIN 1')."
+    ]
+  },
+  "colors": {
+    "theme_strategy": "Dual-Mode 'Tactical'",
+    "palettes": {
+      "dark": {
+        "background": "#09090B",
+        "surface": "#18181B",
+        "surface_highlight": "#27272A",
+        "primary": "#10B981",
+        "primary_glow": "rgba(16, 185, 129, 0.3)",
+        "secondary": "#3F3F46",
+        "accent": "#F59E0B",
+        "danger": "#EF4444",
+        "text_primary": "#FAFAFA",
+        "text_secondary": "#A1A1AA",
+        "border": "rgba(255, 255, 255, 0.1)"
+      },
+      "light": {
+        "background": "#F8FAFC",
+        "surface": "#FFFFFF",
+        "surface_highlight": "#F1F5F9",
+        "primary": "#059669",
+        "primary_glow": "rgba(5, 150, 105, 0.1)",
+        "secondary": "#E2E8F0",
+        "accent": "#D97706",
+        "danger": "#DC2626",
+        "text_primary": "#0F172A",
+        "text_secondary": "#64748B",
+        "border": "rgba(0, 0, 0, 0.08)"
+      }
+    },
+    "usage_rules": [
+      "Do NOT use gradients for backgrounds. Use solid colors + subtle noise/grain.",
+      "Primary color is for 'Success' and 'Action' only.",
+      "Use 'Danger' color for 'Incorrect Answer' feedback.",
+      "Use 'Accent' (Amber) for 'Mark for Review'."
+    ]
+  },
+  "visual_enhancers": {
+    "textures": [
+      "Noise Overlay: Add a fixed, pointer-events-none div with a noise bg image at 3% opacity over the entire app.",
+      "Scanlines: Optional subtle horizontal lines on Dark Mode dashboard backgrounds."
+    ],
+    "effects": [
+      "Glassmorphism: Use 'backdrop-blur-xl' + 'bg-background/80' for sticky headers and floating controls.",
+      "Glow: Add 'shadow-[0_0_20px_rgba(16,185,129,0.2)]' to the primary CTA in dark mode."
+    ],
+    "borders": [
+      "Tech Borders: Use 1px borders. On cards, consider adding a 'corner accent' (a small 4px colored line at the top left)."
+    ]
+  },
+  "layout": {
+    "grid_system": "Bento Grid (Mode B - High Density)",
+    "spacing": {
+      "container_padding": "p-6 md:p-12",
+      "gap": "gap-6",
+      "internal_padding": "p-6"
+    },
+    "strategies": [
+      "Dashboard: 4-column grid. 'Readiness Score' takes 2x2. 'Domains' take 1x1. 'Streak' takes 1x2 (tall).",
+      "Study Mode: Single column, max-width-3xl, centered. Distraction-free.",
+      "Exam Mode: Full screen, hidden navigation, timer fixed at top."
+    ]
+  },
+  "components": {
+    "library": "shadcn/ui",
+    "customization_rules": {
+      "Card": "Remove default shadow. Add 1px border. In Dark Mode, add a subtle hover glow.",
+      "Button": "Sharp corners or slightly rounded (rounded-md). No pill shapes. Font: JetBrains Mono.",
+      "Progress": "Thick bars (h-4). Striped animation for 'Active' state.",
+      "Badge": "Outline variant preferred. 'border-primary text-primary'."
+    },
+    "specific_components": [
+      {
+        "name": "HeatmapCalendar",
+        "type": "Custom",
+        "description": "GitHub-style contribution graph for study streaks. Use 'react-calendar-heatmap' or build with grid."
+      },
+      {
+        "name": "DomainRadar",
+        "type": "Custom",
+        "description": "Radar chart (Recharts) showing proficiency across the 5 SY0-701 domains."
+      },
+      {
+        "name": "QuestionCard",
+        "type": "Custom",
+        "description": "The core study unit. Needs 'Question Text', 'Code Snippet Area' (if needed), 'Options List', 'Explanation Panel' (collapsible)."
+      }
+    ]
+  },
+  "assets": {
+    "icons": {
+      "primary_library": "phosphor-icons",
+      "style": "duotone",
+      "usage": "Use 'Shield' for Security, 'Target' for Goals, 'Lightning' for Streaks, 'Brain' for Knowledge."
+    },
+    "images": [
+      {
+        "category": "Hero Background",
+        "url": "https://images.unsplash.com/photo-1669052700037-db884b37b2d9?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "description": "Dark, moody laptop scene with green accents. Use with heavy overlay (opacity 20%) for Landing Page hero."
+      },
+      {
+        "category": "Auth Page Side",
+        "url": "https://images.unsplash.com/photo-1696013910376-c56f76dd8178?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "description": "Abstract lock on black. Perfect for the side panel of the Login/Register page."
+      }
+    ]
+  },
+  "motion": {
+    "library": "framer-motion",
+    "rules": [
+      "Page Transitions: Simple opacity fade (duration: 0.2s).",
+      "Card Hover: 'y: -4px' lift.",
+      "Success State: When answering correctly, flash the card border Green.",
+      "Error State: Shake animation (x: [-2, 2, -2, 2, 0])."
+    ]
+  },
+  "universal_guidelines": {
+    "anti_slop": [
+      "NO gradients on text.",
+      "NO generic 'SaaS Blue' (#3B82F6). Use the custom Emerald/Sky palette.",
+      "NO centered text for long questions. Always left-align for readability.",
+      "NO 'Lorem Ipsum'. Use real security terms (Phishing, DDoS, Malware) in placeholders."
+    ],
+    "accessibility": [
+      "Ensure text contrast > 4.5:1.",
+      "Focus rings must be visible (Use 'ring-2 ring-primary').",
+      "All interactive elements must have 'data-testid'."
+    ]
+  },
+  "instructions_to_main_agent": "You are building a 'Tactical Study Tool'. Think of it as a piece of software used by a cyber operative to train. It should feel fast, responsive, and precise. Use the 'JetBrains Mono' font to sell the coding/terminal aesthetic. Implement the Dark/Light toggle immediately as it changes the entire vibe."
+}
