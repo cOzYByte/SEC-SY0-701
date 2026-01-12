@@ -603,6 +603,62 @@ async def submit_review(review: ReviewSubmit, current_user: dict = Depends(get_c
 
 # ============ SEED DATA ============
 
+@api_router.post("/admin/randomize-answers")
+async def randomize_answers():
+    """Randomize answer positions so correct answer isn't always 'b'"""
+    import random
+    
+    questions = await db.questions.find({}).to_list(1000)
+    updated = 0
+    
+    for q in questions:
+        options = q.get('options', [])
+        correct_answer = q.get('correct_answer')
+        
+        if not options or not correct_answer:
+            continue
+        
+        # Find the correct option text
+        correct_option = None
+        for opt in options:
+            if opt['id'] == correct_answer:
+                correct_option = opt.copy()
+                break
+        
+        if not correct_option:
+            continue
+        
+        # Shuffle options
+        random.shuffle(options)
+        
+        # Reassign IDs (a, b, c, d) based on new positions
+        new_correct_answer = None
+        ids = ['a', 'b', 'c', 'd']
+        for i, opt in enumerate(options):
+            if opt['text'] == correct_option['text']:
+                new_correct_answer = ids[i]
+            opt['id'] = ids[i]
+        
+        # Update in database
+        await db.questions.update_one(
+            {'_id': q['_id']},
+            {'$set': {
+                'options': options,
+                'correct_answer': new_correct_answer
+            }}
+        )
+        updated += 1
+    
+    # Get new distribution
+    all_answers = [q['correct_answer'] async for q in db.questions.find({}, {'correct_answer': 1})]
+    from collections import Counter
+    distribution = dict(Counter(all_answers))
+    
+    return {
+        "message": f"Randomized {updated} questions",
+        "distribution": distribution
+    }
+
 @api_router.post("/seed-questions")
 async def seed_questions():
     # Check if questions already exist
