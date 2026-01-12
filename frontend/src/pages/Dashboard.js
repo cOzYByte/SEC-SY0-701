@@ -161,95 +161,95 @@ const Dashboard = () => {
               <p className="font-mono text-2xl sm:text-3xl font-bold tracking-tighter" data-testid="total-questions">
                 {progress?.total_questions_answered || 0}
               </p>
-              <p className="text-muted-foreground text-sm">Answered</p>
+              <p className="text-muted-foreground text-xs sm:text-sm">Answered</p>
             </CardContent>
           </Card>
 
           <Card className="corner-accent" data-testid="accuracy-card">
-            <CardHeader className="pb-2">
-              <CardTitle className="font-mono text-xs tracking-wider text-muted-foreground">ACCURACY</CardTitle>
+            <CardHeader className="pb-1 sm:pb-2">
+              <CardTitle className="font-mono text-[10px] sm:text-xs tracking-wider text-muted-foreground">ACCURACY</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="font-mono text-3xl font-bold tracking-tighter text-primary" data-testid="accuracy-value">
+            <CardContent className="pt-0">
+              <p className="font-mono text-2xl sm:text-3xl font-bold tracking-tighter text-primary" data-testid="accuracy-value">
                 {progress?.accuracy || 0}%
               </p>
-              <p className="text-muted-foreground text-sm">Correct Rate</p>
+              <p className="text-muted-foreground text-xs sm:text-sm">Correct Rate</p>
             </CardContent>
           </Card>
 
           <Card className="corner-accent" data-testid="streak-card">
-            <CardHeader className="pb-2">
-              <CardTitle className="font-mono text-xs tracking-wider text-muted-foreground">STREAK</CardTitle>
+            <CardHeader className="pb-1 sm:pb-2">
+              <CardTitle className="font-mono text-[10px] sm:text-xs tracking-wider text-muted-foreground">STREAK</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-2">
-                <Fire weight="duotone" className="w-6 h-6 text-accent" />
-                <p className="font-mono text-3xl font-bold tracking-tighter" data-testid="streak-value">
+            <CardContent className="pt-0">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <Fire weight="duotone" className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
+                <p className="font-mono text-2xl sm:text-3xl font-bold tracking-tighter" data-testid="streak-value">
                   {progress?.current_streak || 0}
                 </p>
               </div>
-              <p className="text-muted-foreground text-sm">Days</p>
+              <p className="text-muted-foreground text-xs sm:text-sm">Days</p>
             </CardContent>
           </Card>
 
           <Card className="corner-accent" data-testid="best-streak-card">
-            <CardHeader className="pb-2">
-              <CardTitle className="font-mono text-xs tracking-wider text-muted-foreground">BEST STREAK</CardTitle>
+            <CardHeader className="pb-1 sm:pb-2">
+              <CardTitle className="font-mono text-[10px] sm:text-xs tracking-wider text-muted-foreground">BEST STREAK</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-2">
-                <Trophy weight="duotone" className="w-6 h-6 text-accent" />
-                <p className="font-mono text-3xl font-bold tracking-tighter" data-testid="best-streak-value">
+            <CardContent className="pt-0">
+              <div className="flex items-center gap-1 sm:gap-2">
+                <Trophy weight="duotone" className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
+                <p className="font-mono text-2xl sm:text-3xl font-bold tracking-tighter" data-testid="best-streak-value">
                   {progress?.longest_streak || 0}
                 </p>
               </div>
-              <p className="text-muted-foreground text-sm">Days</p>
+              <p className="text-muted-foreground text-xs sm:text-sm">Days</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Study Modes */}
-        <div className="mb-8">
-          <h2 className="font-mono text-lg font-bold tracking-tight mb-4">STUDY MODES</h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="mb-6 sm:mb-8">
+          <h2 className="font-mono text-base sm:text-lg font-bold tracking-tight mb-3 sm:mb-4">STUDY MODES</h2>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
             <Button
               variant="outline"
-              className="h-auto p-6 flex flex-col items-start gap-3 justify-start card-hover border-primary/50 bg-primary/5"
+              className="h-auto p-3 sm:p-6 flex flex-col items-start gap-2 sm:gap-3 justify-start card-hover border-primary/50 bg-primary/5"
               onClick={() => navigate('/smart-review')}
               data-testid="smart-review-btn"
             >
-              <Atom weight="duotone" className="w-8 h-8 text-primary" />
+              <Atom weight="duotone" className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
               <div className="text-left">
-                <p className="font-mono font-bold tracking-wider">SMART REVIEW</p>
-                <p className="text-muted-foreground text-sm font-sans">Spaced repetition</p>
+                <p className="font-mono font-bold text-xs sm:text-base tracking-wider">SMART REVIEW</p>
+                <p className="text-muted-foreground text-[10px] sm:text-sm font-sans">Spaced repetition</p>
               </div>
-              <CaretRight className="w-5 h-5 ml-auto" />
+              <CaretRight className="w-4 h-4 sm:w-5 sm:h-5 ml-auto hidden sm:block" />
             </Button>
 
             <Button
               variant="outline"
-              className="h-auto p-6 flex flex-col items-start gap-3 justify-start card-hover"
+              className="h-auto p-3 sm:p-6 flex flex-col items-start gap-2 sm:gap-3 justify-start card-hover"
               onClick={() => navigate('/practice')}
               data-testid="practice-mode-btn"
             >
-              <Target weight="duotone" className="w-8 h-8 text-chart-2" />
+              <Target weight="duotone" className="w-6 h-6 sm:w-8 sm:h-8 text-chart-2" />
               <div className="text-left">
-                <p className="font-mono font-bold tracking-wider">PRACTICE</p>
-                <p className="text-muted-foreground text-sm font-sans">Immediate feedback</p>
+                <p className="font-mono font-bold text-xs sm:text-base tracking-wider">PRACTICE</p>
+                <p className="text-muted-foreground text-[10px] sm:text-sm font-sans">Immediate feedback</p>
               </div>
-              <CaretRight className="w-5 h-5 ml-auto" />
+              <CaretRight className="w-4 h-4 sm:w-5 sm:h-5 ml-auto hidden sm:block" />
             </Button>
 
             <Button
               variant="outline"
-              className="h-auto p-6 flex flex-col items-start gap-3 justify-start card-hover"
+              className="h-auto p-3 sm:p-6 flex flex-col items-start gap-2 sm:gap-3 justify-start card-hover"
               onClick={() => navigate('/exam')}
               data-testid="exam-mode-btn"
             >
-              <Lightning weight="duotone" className="w-8 h-8 text-accent" />
+              <Lightning weight="duotone" className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
               <div className="text-left">
-                <p className="font-mono font-bold tracking-wider">EXAM SIM</p>
-                <p className="text-muted-foreground text-sm font-sans">Timed simulation</p>
+                <p className="font-mono font-bold text-xs sm:text-base tracking-wider">EXAM SIM</p>
+                <p className="text-muted-foreground text-[10px] sm:text-sm font-sans">Timed simulation</p>
               </div>
               <CaretRight className="w-5 h-5 ml-auto" />
             </Button>
