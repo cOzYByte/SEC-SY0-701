@@ -209,14 +209,28 @@ const Dashboard = () => {
         {/* Study Modes */}
         <div className="mb-8">
           <h2 className="font-mono text-lg font-bold tracking-tight mb-4">STUDY MODES</h2>
-          <div className="grid sm:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Button
+              variant="outline"
+              className="h-auto p-6 flex flex-col items-start gap-3 justify-start card-hover border-primary/50 bg-primary/5"
+              onClick={() => navigate('/smart-review')}
+              data-testid="smart-review-btn"
+            >
+              <Atom weight="duotone" className="w-8 h-8 text-primary" />
+              <div className="text-left">
+                <p className="font-mono font-bold tracking-wider">SMART REVIEW</p>
+                <p className="text-muted-foreground text-sm font-sans">Spaced repetition</p>
+              </div>
+              <CaretRight className="w-5 h-5 ml-auto" />
+            </Button>
+
             <Button
               variant="outline"
               className="h-auto p-6 flex flex-col items-start gap-3 justify-start card-hover"
               onClick={() => navigate('/practice')}
               data-testid="practice-mode-btn"
             >
-              <Target weight="duotone" className="w-8 h-8 text-primary" />
+              <Target weight="duotone" className="w-8 h-8 text-chart-2" />
               <div className="text-left">
                 <p className="font-mono font-bold tracking-wider">PRACTICE</p>
                 <p className="text-muted-foreground text-sm font-sans">Immediate feedback</p>
