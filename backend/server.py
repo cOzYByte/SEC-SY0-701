@@ -22,7 +22,7 @@ client = AsyncIOMotorClient(mongo_url)
 db = client[os.environ['DB_NAME']]
 
 # JWT Configuration
-JWT_SECRET = os.environ.get('JWT_SECRET', 'secplus-study-app-secret-key-2024')
+JWT_SECRET = os.environ.get('JWT_SECRET')
 JWT_ALGORITHM = "HS256"
 JWT_EXPIRATION_HOURS = 24
 
@@ -486,8 +486,8 @@ async def get_due_cards(limit: int = 20, current_user: dict = Depends(get_curren
     
     due_question_ids = [c["question_id"] for c in due_cards]
     
-    # Get new questions (never reviewed)
-    reviewed_ids = [c["question_id"] async for c in db.spaced_repetition.find({"user_id": user_id}, {"question_id": 1})]
+    # Get new questions (never reviewed) - use distinct for efficiency
+    reviewed_ids = await db.spaced_repetition.distinct("question_id", {"user_id": user_id})
     
     new_needed = max(0, limit - len(due_cards))
     if new_needed > 0:
