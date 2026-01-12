@@ -1,0 +1,27 @@
+{
+  "short_name": "SEC+",
+  "name": "SEC SY0-701 Study App",
+  "description": "Master your CompTIA Security+ SY0-701 certification with practice questions, exam simulations, and spaced repetition.",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect fill='%230d1117' width='192' height='192' rx='24'/%3E%3Cpath d='M96 32L144 56V104C144 130.5 123.3 153.4 96 160C68.7 153.4 48 130.5 48 104V56L96 32Z' fill='%2310b981' stroke='%2310b981' stroke-width='4'/%3E%3Cpath d='M88 96L80 88L74 94L88 108L118 78L112 72L88 96Z' fill='%230d1117'/%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect fill='%230d1117' width='512' height='512' rx='64'/%3E%3Cpath d='M256 85L384 149V277C384 348 330.2 409.1 256 427C181.8 409.1 128 348 128 277V149L256 85Z' fill='%2310b981' stroke='%2310b981' stroke-width='8'/%3E%3Cpath d='M234 256L213 235L197 251L234 288L315 207L299 191L234 256Z' fill='%230d1117'/%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#10b981",
+  "background_color": "#0d1117",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": ["education", "productivity"],
+  "lang": "en-US"
+}

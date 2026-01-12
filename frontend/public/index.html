@@ -2,23 +2,27 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <meta name="description" content="A product of emergent.sh" />
-        <!--
-        manifest.json provides metadata used when your web app is installed on a
-        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-        -->
-        <!--
-        Notice the use of %PUBLIC_URL% in the tags above.
-        It will be replaced with the URL of the `public` folder during the build.
-        Only files inside the `public` folder can be referenced from the HTML.
-
-        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-        work correctly both with client-side routing and a non-root public URL.
-        Learn how to configure a non-root public URL by running `npm run build`.
-        -->
-        <title>Emergent | Fullstack App</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+        <meta name="theme-color" content="#0d1117" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <meta name="description" content="Master your CompTIA Security+ SY0-701 certification with 880+ practice questions, exam simulations, flashcards, and spaced repetition." />
+        
+        <!-- PWA Meta Tags -->
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="SEC+" />
+        <meta name="application-name" content="SEC SY0-701" />
+        <meta name="msapplication-TileColor" content="#10b981" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        
+        <!-- PWA Manifest -->
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        
+        <!-- Apple Touch Icons -->
+        <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%230d1117' width='180' height='180' rx='20'/%3E%3Cpath d='M90 30L135 52.5V97.5C135 122.25 115.6 143.4 90 150C64.4 143.4 45 122.25 45 97.5V52.5L90 30Z' fill='%2310b981'/%3E%3Cpath d='M82.5 90L75 82.5L69.375 88.125L82.5 101.25L110.625 73.125L105 67.5L82.5 90Z' fill='%230d1117'/%3E%3C/svg%3E" />
+        
+        <title>SEC SY0-701 | Security+ Study App</title>
         <script src="https://assets.emergent.sh/scripts/emergent-main.js"></script>
         <!--
         These two scripts have been added for the Visual Edits, please do not edit or remove them
@@ -43,6 +47,31 @@
                 document.head.appendChild(tailwindScript);
             }
         </script>
+        <style>
+            /* Safe area insets for notched devices */
+            :root {
+                --sat: env(safe-area-inset-top);
+                --sar: env(safe-area-inset-right);
+                --sab: env(safe-area-inset-bottom);
+                --sal: env(safe-area-inset-left);
+            }
+            
+            /* Prevent pull-to-refresh on mobile */
+            body {
+                overscroll-behavior-y: contain;
+            }
+            
+            /* Smooth scrolling */
+            html {
+                scroll-behavior: smooth;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            /* Better touch targets */
+            button, a, [role="button"] {
+                touch-action: manipulation;
+            }
+        </style>
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
