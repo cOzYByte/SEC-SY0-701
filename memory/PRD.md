@@ -42,6 +42,8 @@ Create an app that helps you study for the CompTIA Cybersecurity Security+ (SY0-
 - ✅ Dark/Light theme toggle
 - ✅ Results page with score breakdown and question review
 - ✅ Session history tracking
+- ✅ **PWA Support** - Installable on mobile devices
+- ✅ **Mobile-optimized responsive design**
 
 ## Question Bank Distribution
 | Domain | Name | Questions |
