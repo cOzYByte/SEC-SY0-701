@@ -87,6 +87,26 @@ class ProgressResponse(BaseModel):
     longest_streak: int
     last_study_date: Optional[str]
 
+# Spaced Repetition Models (SM-2 Algorithm)
+class SpacedRepetitionCard(BaseModel):
+    question_id: str
+    ease_factor: float = 2.5  # Starting ease factor
+    interval: int = 0  # Days until next review
+    repetitions: int = 0  # Number of successful reviews
+    next_review: str  # ISO date string
+    last_review: Optional[str] = None
+
+class ReviewSubmit(BaseModel):
+    question_id: str
+    quality: int  # 0-5 rating (0-2 = fail, 3-5 = pass)
+
+class SpacedRepetitionStats(BaseModel):
+    total_cards: int
+    due_today: int
+    mastered: int  # Cards with interval > 21 days
+    learning: int  # Cards with interval <= 21 days
+    new_cards: int  # Cards never reviewed
+
 # ============ AUTH HELPERS ============
 
 def hash_password(password: str) -> str:
