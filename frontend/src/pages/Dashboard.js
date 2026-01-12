@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Shield, Target, Lightning, Brain, TrendingUp, Fire, Trophy, ChartBar, SignOut, Moon, Sun, CaretRight, Atom } from '@phosphor-icons/react';
+import { Shield, Target, Lightning, Brain, TrendUp, Fire, Trophy, ChartBar, SignOut, Moon, Sun, CaretRight, Atom } from '@phosphor-icons/react';
 import { Button } from '../components/ui/button';
 import { Progress } from '../components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
@@ -305,7 +305,7 @@ const Dashboard = () => {
           <Card className="corner-accent" data-testid="weak-areas-card">
             <CardHeader>
               <CardTitle className="font-mono text-sm tracking-wider flex items-center gap-2">
-                <TrendingUp weight="duotone" className="w-5 h-5 text-destructive" />
+                <TrendUp weight="duotone" className="w-5 h-5 text-destructive" />
                 WEAK AREAS
               </CardTitle>
             </CardHeader>
