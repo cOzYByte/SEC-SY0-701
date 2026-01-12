@@ -251,27 +251,27 @@ const Dashboard = () => {
                 <p className="font-mono font-bold text-xs sm:text-base tracking-wider">EXAM SIM</p>
                 <p className="text-muted-foreground text-[10px] sm:text-sm font-sans">Timed simulation</p>
               </div>
-              <CaretRight className="w-5 h-5 ml-auto" />
+              <CaretRight className="w-4 h-4 sm:w-5 sm:h-5 ml-auto hidden sm:block" />
             </Button>
 
             <Button
               variant="outline"
-              className="h-auto p-6 flex flex-col items-start gap-3 justify-start card-hover"
+              className="h-auto p-3 sm:p-6 flex flex-col items-start gap-2 sm:gap-3 justify-start card-hover"
               onClick={() => navigate('/flashcards')}
               data-testid="flashcard-mode-btn"
             >
-              <Brain weight="duotone" className="w-8 h-8 text-chart-3" />
+              <Brain weight="duotone" className="w-6 h-6 sm:w-8 sm:h-8 text-chart-3" />
               <div className="text-left">
-                <p className="font-mono font-bold tracking-wider">FLASHCARDS</p>
-                <p className="text-muted-foreground text-sm font-sans">Quick review</p>
+                <p className="font-mono font-bold text-xs sm:text-base tracking-wider">FLASHCARDS</p>
+                <p className="text-muted-foreground text-[10px] sm:text-sm font-sans">Quick review</p>
               </div>
-              <CaretRight className="w-5 h-5 ml-auto" />
+              <CaretRight className="w-4 h-4 sm:w-5 sm:h-5 ml-auto hidden sm:block" />
             </Button>
           </div>
         </div>
 
         {/* Domain Progress */}
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-8">
           <Card className="corner-accent" data-testid="domain-progress-card">
             <CardHeader>
               <CardTitle className="font-mono text-sm tracking-wider flex items-center gap-2">
