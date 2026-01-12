@@ -9,6 +9,7 @@ import Practice from "./pages/Practice";
 import Exam from "./pages/Exam";
 import Flashcards from "./pages/Flashcards";
 import Results from "./pages/Results";
+import SmartReview from "./pages/SmartReview";
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -54,6 +55,7 @@ function AppRoutes() {
       <Route path="/practice" element={<ProtectedRoute><Practice /></ProtectedRoute>} />
       <Route path="/exam" element={<ProtectedRoute><Exam /></ProtectedRoute>} />
       <Route path="/flashcards" element={<ProtectedRoute><Flashcards /></ProtectedRoute>} />
+      <Route path="/smart-review" element={<ProtectedRoute><SmartReview /></ProtectedRoute>} />
       <Route path="/results" element={<ProtectedRoute><Results /></ProtectedRoute>} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
