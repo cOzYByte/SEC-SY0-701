@@ -114,7 +114,7 @@ const Landing = () => {
               </div>
               <div className="flex gap-8 pt-4">
                 <div>
-                  <p className="font-mono text-3xl font-bold tracking-tighter text-primary">500+</p>
+                  <p className="font-mono text-3xl font-bold tracking-tighter text-primary">880+</p>
                   <p className="text-muted-foreground text-sm">Practice Questions</p>
                 </div>
                 <div>
