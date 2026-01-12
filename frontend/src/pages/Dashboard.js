@@ -110,15 +110,15 @@ const Dashboard = () => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           {/* Readiness Score */}
           <Card className="col-span-2 row-span-2 relative overflow-hidden corner-accent" data-testid="readiness-card">
-            <CardHeader>
-              <CardTitle className="font-mono text-sm tracking-wider text-muted-foreground">EXAM READINESS</CardTitle>
+            <CardHeader className="pb-2 sm:pb-4">
+              <CardTitle className="font-mono text-xs sm:text-sm tracking-wider text-muted-foreground">EXAM READINESS</CardTitle>
             </CardHeader>
-            <CardContent className="flex flex-col items-center justify-center pb-8">
-              <div className="relative w-48 h-48 mb-4">
-                <svg className="w-full h-full transform -rotate-90">
+            <CardContent className="flex flex-col items-center justify-center pb-4 sm:pb-8">
+              <div className="relative w-32 h-32 sm:w-48 sm:h-48 mb-2 sm:mb-4">
+                <svg className="w-full h-full transform -rotate-90" viewBox="0 0 192 192">
                   <circle
                     cx="96"
                     cy="96"
@@ -140,13 +140,13 @@ const Dashboard = () => {
                   />
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center flex-col">
-                  <span className="font-mono text-5xl font-bold tracking-tighter" data-testid="readiness-score">
+                  <span className="font-mono text-3xl sm:text-5xl font-bold tracking-tighter" data-testid="readiness-score">
                     {getReadinessScore()}%
                   </span>
-                  <span className="text-muted-foreground text-sm">Ready</span>
+                  <span className="text-muted-foreground text-xs sm:text-sm">Ready</span>
                 </div>
               </div>
-              <p className="text-muted-foreground text-center text-sm">
+              <p className="text-muted-foreground text-center text-xs sm:text-sm">
                 Based on {progress?.total_questions_answered || 0} questions answered
               </p>
             </CardContent>
@@ -154,11 +154,11 @@ const Dashboard = () => {
 
           {/* Stats Cards */}
           <Card className="corner-accent" data-testid="questions-card">
-            <CardHeader className="pb-2">
-              <CardTitle className="font-mono text-xs tracking-wider text-muted-foreground">QUESTIONS</CardTitle>
+            <CardHeader className="pb-1 sm:pb-2">
+              <CardTitle className="font-mono text-[10px] sm:text-xs tracking-wider text-muted-foreground">QUESTIONS</CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className="font-mono text-3xl font-bold tracking-tighter" data-testid="total-questions">
+            <CardContent className="pt-0">
+              <p className="font-mono text-2xl sm:text-3xl font-bold tracking-tighter" data-testid="total-questions">
                 {progress?.total_questions_answered || 0}
               </p>
               <p className="text-muted-foreground text-sm">Answered</p>
