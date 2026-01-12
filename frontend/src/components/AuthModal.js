@@ -11,6 +11,13 @@ const AuthModal = ({ open, onClose, initialMode = 'login' }) => {
   const navigate = useNavigate();
   const { login, register } = useAuth();
   const [mode, setMode] = useState(initialMode);
+  
+  // Update mode when initialMode changes
+  React.useEffect(() => {
+    if (open) {
+      setMode(initialMode);
+    }
+  }, [initialMode, open]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
