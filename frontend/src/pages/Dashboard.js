@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Shield, Target, Lightning, Brain, TrendUp, Fire, Trophy, ChartBar, SignOut, Moon, Sun, CaretRight } from '@phosphor-icons/react';
+import { Shield, Target, Lightning, Brain, TrendingUp, Fire, Trophy, ChartBar, SignOut, Moon, Sun, CaretRight, Atom } from '@phosphor-icons/react';
 import { Button } from '../components/ui/button';
 import { Progress } from '../components/ui/progress';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
