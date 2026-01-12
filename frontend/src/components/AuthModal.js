@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, X, Eye, EyeSlash } from '@phosphor-icons/react';
+import { Shield, Eye, EyeSlash } from '@phosphor-icons/react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
