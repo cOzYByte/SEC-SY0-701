@@ -99,6 +99,11 @@
     user-select: none;
 }
 
+/* Hide Emergent badge in preview */
+#emergent-badge {
+    display: none !important;
+}
+
 /* Noise texture overlay */
 .noise-overlay {
     position: fixed;
