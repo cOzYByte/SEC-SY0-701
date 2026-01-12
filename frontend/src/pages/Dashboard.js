@@ -75,38 +75,40 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-safe">
       {/* Header */}
-      <header className="sticky top-0 z-50 glass border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Shield weight="duotone" className="w-8 h-8 text-primary" />
-            <span className="font-mono font-bold text-xl tracking-tight">SEC <span className="text-primary">SY0-701</span></span>
+      <header className="sticky top-0 z-50 glass border-b border-border pt-safe">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2 shrink-0">
+            <Shield weight="duotone" className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
+            <span className="font-mono font-bold text-base sm:text-xl tracking-tight whitespace-nowrap">SEC <span className="text-primary">SY0-701</span></span>
           </div>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-muted-foreground hidden sm:block">Welcome, {user?.name}</span>
+          <div className="flex items-center gap-1 sm:gap-4">
+            <span className="text-xs sm:text-sm text-muted-foreground hidden md:block">Welcome, {user?.name}</span>
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
               data-testid="dashboard-theme-toggle"
+              className="h-8 w-8 sm:h-10 sm:w-10"
             >
-              {theme === 'dark' ? <Sun weight="duotone" className="w-5 h-5" /> : <Moon weight="duotone" className="w-5 h-5" />}
+              {theme === 'dark' ? <Sun weight="duotone" className="w-4 h-4 sm:w-5 sm:h-5" /> : <Moon weight="duotone" className="w-4 h-4 sm:w-5 sm:h-5" />}
             </Button>
             <Button
               variant="ghost"
               size="icon"
               onClick={handleLogout}
               data-testid="logout-btn"
+              className="h-8 w-8 sm:h-10 sm:w-10"
             >
-              <SignOut weight="duotone" className="w-5 h-5" />
+              <SignOut weight="duotone" className="w-4 h-4 sm:w-5 sm:h-5" />
             </Button>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-8">
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           {/* Readiness Score */}
