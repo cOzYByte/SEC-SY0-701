@@ -43,32 +43,33 @@ const Landing = () => {
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Shield weight="duotone" className="w-8 h-8 text-primary" />
-            <span className="font-mono font-bold text-xl tracking-tight">SEC <span className="text-primary">SY0-701</span></span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2 shrink-0">
+            <Shield weight="duotone" className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
+            <span className="font-mono font-bold text-base sm:text-xl tracking-tight whitespace-nowrap">SEC <span className="text-primary">SY0-701</span></span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleTheme}
               data-testid="theme-toggle"
+              className="h-8 w-8 sm:h-10 sm:w-10"
             >
-              {theme === 'dark' ? <Sun weight="duotone" className="w-5 h-5" /> : <Moon weight="duotone" className="w-5 h-5" />}
+              {theme === 'dark' ? <Sun weight="duotone" className="w-4 h-4 sm:w-5 sm:h-5" /> : <Moon weight="duotone" className="w-4 h-4 sm:w-5 sm:h-5" />}
             </Button>
             <Button
               variant="ghost"
               onClick={() => handleGetStarted('login')}
               data-testid="login-btn"
-              className="font-mono text-sm tracking-wider"
+              className="font-mono text-xs sm:text-sm tracking-wider px-2 sm:px-4"
             >
               LOGIN
             </Button>
             <Button
               onClick={() => handleGetStarted('register')}
               data-testid="register-btn"
-              className="font-mono text-sm tracking-wider glow-primary"
+              className="font-mono text-xs sm:text-sm tracking-wider glow-primary px-2 sm:px-4"
             >
               GET STARTED
             </Button>
