@@ -305,7 +305,7 @@ const Dashboard = () => {
           <Card className="corner-accent" data-testid="weak-areas-card">
             <CardHeader>
               <CardTitle className="font-mono text-sm tracking-wider flex items-center gap-2">
-                <TrendUp weight="duotone" className="w-5 h-5 text-destructive" />
+                <TrendingUp weight="duotone" className="w-5 h-5 text-destructive" />
                 WEAK AREAS
               </CardTitle>
             </CardHeader>
