@@ -603,6 +603,18 @@ async def submit_review(review: ReviewSubmit, current_user: dict = Depends(get_c
 
 # ============ SEED DATA ============
 
+@api_router.post("/admin/bulk-import")
+async def bulk_import_questions(questions: List[dict]):
+    """Bulk import questions - replaces all existing questions"""
+    # Clear existing questions
+    await db.questions.delete_many({})
+    
+    # Insert new questions
+    if questions:
+        await db.questions.insert_many(questions)
+    
+    return {"message": f"Imported {len(questions)} questions"}
+
 @api_router.post("/admin/randomize-answers")
 async def randomize_answers():
     """Randomize answer positions so correct answer isn't always 'b'"""
