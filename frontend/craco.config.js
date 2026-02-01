@@ -9,7 +9,7 @@ const isDevServer = process.env.NODE_ENV !== "production";
 // Environment variable overrides
 const config = {
   enableHealthCheck: process.env.ENABLE_HEALTH_CHECK === "true",
-  enableVisualEdits: isDevServer, // Only enable during dev server
+  enableVisualEdits: false, // Disable for all builds to avoid issues
 };
 
 // Conditionally load visual edits modules only in dev mode
@@ -17,8 +17,8 @@ let setupDevServer;
 let babelMetadataPlugin;
 
 if (config.enableVisualEdits) {
-  setupDevServer = require("./plugins/visual-edits/dev-server-setup");
-  babelMetadataPlugin = require("./plugins/visual-edits/babel-metadata-plugin");
+  // setupDevServer = require("./plugins/visual-edits/dev-server-setup");
+  // babelMetadataPlugin = require("./plugins/visual-edits/babel-metadata-plugin");
 }
 
 // Conditionally load health check modules only if enabled
@@ -27,9 +27,9 @@ let setupHealthEndpoints;
 let healthPluginInstance;
 
 if (config.enableHealthCheck) {
-  WebpackHealthPlugin = require("./plugins/health-check/webpack-health-plugin");
-  setupHealthEndpoints = require("./plugins/health-check/health-endpoints");
-  healthPluginInstance = new WebpackHealthPlugin();
+  // WebpackHealthPlugin = require("./plugins/health-check/webpack-health-plugin");
+  // setupHealthEndpoints = require("./plugins/health-check/health-endpoints");
+  // healthPluginInstance = new WebpackHealthPlugin();
 }
 
 const webpackConfig = {
@@ -63,7 +63,7 @@ const webpackConfig = {
 
       // Add health check plugin to webpack if enabled
       if (config.enableHealthCheck && healthPluginInstance) {
-        webpackConfig.plugins.push(healthPluginInstance);
+        // webpackConfig.plugins.push(healthPluginInstance);
       }
       return webpackConfig;
     },
@@ -72,15 +72,15 @@ const webpackConfig = {
 
 // Only add babel metadata plugin during dev server
 if (config.enableVisualEdits && babelMetadataPlugin) {
-  webpackConfig.babel = {
-    plugins: [babelMetadataPlugin],
-  };
+  // webpackConfig.babel = {
+  //   plugins: [babelMetadataPlugin],
+  // };
 }
 
 webpackConfig.devServer = (devServerConfig) => {
   // Apply visual edits dev server setup only if enabled
   if (config.enableVisualEdits && setupDevServer) {
-    devServerConfig = setupDevServer(devServerConfig);
+    // devServerConfig = setupDevServer(devServerConfig);
   }
 
   // Add health check endpoints if enabled
@@ -94,7 +94,7 @@ webpackConfig.devServer = (devServerConfig) => {
       }
 
       // Setup health endpoints
-      setupHealthEndpoints(devServer, healthPluginInstance);
+      // setupHealthEndpoints(devServer, healthPluginInstance);
 
       return middlewares;
     };
