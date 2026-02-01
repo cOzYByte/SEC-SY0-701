@@ -4,6 +4,6 @@ motor
 pydantic
 python-dotenv
 bcrypt
-python-jose
+PyJWT
 python-multipart
 aiofiles
