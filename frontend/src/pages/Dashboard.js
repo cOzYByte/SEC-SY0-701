@@ -17,6 +17,7 @@ const Dashboard = () => {
   const [progress, setProgress] = useState(null);
   const [weakAreas, setWeakAreas] = useState([]);
   const [history, setHistory] = useState([]);
+  const [domainCounts, setDomainCounts] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,14 +26,16 @@ const Dashboard = () => {
 
   const fetchData = async () => {
     try {
-      const [progressRes, weakRes, historyRes] = await Promise.all([
+      const [progressRes, weakRes, historyRes, domainCountRes] = await Promise.all([
         axios.get(`${API}/progress`),
         axios.get(`${API}/progress/weak-areas`),
-        axios.get(`${API}/progress/history`)
+        axios.get(`${API}/progress/history`),
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/questions/count_by_domain`)
       ]);
       setProgress(progressRes.data);
       setWeakAreas(weakRes.data);
       setHistory(historyRes.data);
+      setDomainCounts(domainCountRes.data);
     } catch (error) {
       console.error('Failed to fetch data:', error);
     } finally {
@@ -296,7 +299,12 @@ const Dashboard = () => {
                     <div className="flex items-center gap-3">
                       <Progress value={accuracy} className="h-3 flex-1" />
                     </div>
-                    <p className="text-sm truncate">{domain.name}</p>
+                    <p className="text-sm truncate">
+                      {domain.name}
+                      {domainCounts.length > 0 && (
+                        <> ({domainCounts.find(d => d.domain === domain.name)?.count || 0} questions)</>
+                      )}
+                    </p>
                   </div>
                 );
               })}
